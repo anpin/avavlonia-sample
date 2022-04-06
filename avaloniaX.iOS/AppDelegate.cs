@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.iOS;
 using Avalonia.Media;
+using Avalonia.ReactiveUI;
 
 namespace avaloniaX.iOS
 {
@@ -13,6 +14,10 @@ namespace avaloniaX.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : AvaloniaAppDelegate<App>
     {
-        
+        protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
+        {
+            builder.UseReactiveUI();
+            return base.CustomizeAppBuilder(builder);
+        }
     }
 }

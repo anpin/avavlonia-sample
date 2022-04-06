@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.iOS" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="ReactiveUI" Version="17.1.50" />
   </ItemGroup>
 
   <ItemGroup>
