@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:avaloniaX.ViewModels"
+             xmlns:views="clr-namespace:avaloniaX.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="avaloniaX.Views.MainView"
+             Foreground="White"
+             Background="#171C2C">
+  <Design.DataContext>
+    <viewModels:MainViewModel />
+  </Design.DataContext>
+  <UserControl.Resources>
+    <viewModels:ArgConverter x:Key="Converter"/>
+    <DataTemplate x:DataType="viewModels:Bar" x:Key="barView">
+      <Button Content="{Binding Id}" 
+              Margin="5"
+              Width="100"
+              Height="100"
+              FontSize="20"
+              Command="{Binding RelativeSource={RelativeSource AncestorType=views:MainView, Mode=FindAncestor}, Path=DataContext.Command}">
+        <Button.CommandParameter> 
+          <MultiBinding Converter="{StaticResource Converter}">
+            <Binding Path="."/>
+            <!-- <Binding RelativeSource="{RelativeSource AncestorType=viewModels:Foo, Mode=FindAncestor}" Path="."/> -->
+            <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Border}" Path="DataContext"/>
+          </MultiBinding>
+        </Button.CommandParameter> 
+      </Button>
+    </DataTemplate>
+    <DataTemplate x:DataType="viewModels:Foo" x:Key="fooView">
+      <Border Padding="5" x:Name="Border">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <Label Content="{Binding Id}" Grid.Row="0" FontSize="20"/>
+          <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <ItemsRepeater Items="{Binding Bars}" 
+                 ItemTemplate="{StaticResource barView}" > 
+              <ItemsRepeater.Layout>
+                <StackLayout Orientation="Horizontal" Spacing="5"/>
+              </ItemsRepeater.Layout>
+            </ItemsRepeater>
+          </ScrollViewer>
+        </Grid>
+      </Border>
+    </DataTemplate>
+  </UserControl.Resources>
+  <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+      <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ItemsRepeater Items="{Binding Foos}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ItemTemplate="{StaticResource fooView}"/>
+      </ScrollViewer>
+  </Panel>
+</UserControl>
