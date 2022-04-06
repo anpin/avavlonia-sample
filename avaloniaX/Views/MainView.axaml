@@ -38,7 +38,7 @@
           </Grid.RowDefinitions>
           <Label Content="{Binding Id}" Grid.Row="0" FontSize="20"/>
           <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
-            <ItemsRepeater Items="{Binding Bars}" 
+            <ItemsRepeater Items="{Binding Bars}" VerticalCacheLength="1" HorizontalCacheLength="8"
                  ItemTemplate="{StaticResource barView}" > 
               <ItemsRepeater.Layout>
                 <StackLayout Orientation="Horizontal" Spacing="5"/>
@@ -52,7 +52,7 @@
   <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
     <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
       <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-        <ItemsRepeater Items="{Binding Foos}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ItemTemplate="{StaticResource fooView}"/>
+        <ItemsRepeater Items="{Binding Foos}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ItemTemplate="{StaticResource fooView}" VerticalCacheLength="7" HorizontalCacheLength="1"/>
       </ScrollViewer>
   </Panel>
 </UserControl>
