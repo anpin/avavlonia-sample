@@ -1,2 +1,2 @@
 # avavlonia-sample
-Perfmonce test of Avalonia on Android 
+Performance test of Avalonia on Android 
